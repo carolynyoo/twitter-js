@@ -11,3 +11,8 @@ app.get('/', function (req, res) {
   res.send('Hello world!');
 })
 
+app.get('/news', function (req, res) {
+  res.send('This is news!');
+})
+
+ 
