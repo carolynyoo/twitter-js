@@ -2,8 +2,8 @@ var _ = require('underscore');
 
 var data = [];
 
-var add = function (name, text) {
-  data.push({name: name, text: text});
+var add = function (name, text, hashtag, photo) {
+  data.push({name: name, text: text, hashtag: hashtag, photo: photo});
 }
 
 var list = function () {
@@ -28,11 +28,21 @@ var getFakeName = function() {
 
 var getFakeTweet = function() {
   var awesome_adj = ['awesome','breathtaking','amazing','sexy','sweet','cool','wonderful','mindblowing'];
-  return "Fullstack Academy is " + randArrayEl(awesome_adj) + "! The students are just so " + randArrayEl(awesome_adj) + ". #fullstacklove #codedreams";
+  return "Fullstack Academy is " + randArrayEl(awesome_adj) + "! The students are just so " + randArrayEl(awesome_adj);
 };
 
+var getFakeHashtag = function () {
+  var hashtags = ['#fullstacklove', '#codedreams', '#javascript', '#node', '#express'];
+  return randArrayEl(hashtags)+" "+randArrayEl(hashtags);
+}
+
+var getFakePhoto = function () {
+  var photos = ['sean.jpg', 'nimit.jpeg', 'carolyn.jpeg', 'fullstack.png']
+  return randArrayEl(photos);
+}
+
 for(var i=0; i<20; i++) {
-  module.exports.add( getFakeName(), getFakeTweet() );
+  module.exports.add( getFakeName(), getFakeTweet(), getFakeHashtag(), getFakePhoto() );
 }
 
 //console.log(data);

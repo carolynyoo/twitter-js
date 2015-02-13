@@ -1,6 +1,8 @@
 html,
 body {
   height: 100%;
+  background-color: #ddd;
+  font-family: 'Helvetica Neue', sans-serif;
   /* The html and body elements cannot have any padding or margin. */
 }
 
@@ -24,6 +26,46 @@ body {
 /* Custom page CSS
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
+.tweetbox {
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+.tweet {
+  min-height: 65px;
+  padding: 5px 0px;
+  border-bottom: 1px solid #ccc;
+}
+
+.tweet:hover {
+  background-color: #efefef;
+  cursor: pointer;
+}
+
+.tweet-photo {
+  float: left;
+  clear: both;
+  margin-right: 5px;
+  margin-top: 3px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.tweet-photo:hover {
+  opacity: .8;
+}
+
+.tweet-name {
+  font-weight: bold;
+}
+
+.tweet-text {
+
+}
+
+.tweet-hashtag {
+  color: #4099ff;
+}
 
 #wrap > .container {
   padding: 60px 15px 0;
@@ -49,7 +91,6 @@ code {
   float: left;
   height: 48px;
   width: 48px;
-  content:url("http://lorempixel.com/48/48");
 }
 .content {
   margin-left: 60px;

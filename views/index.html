@@ -3,22 +3,25 @@
 {% block content %}
   
   <div class="page-header">
-    <h1>Welcome to Twitter.js, Carolyn &amp; Sean!</h1>
+    <h1>Welcome to Twitter.js, Nimit!</h1>
   </div>
   <div class="row">
     <div class="col-md-3">
       <img src="https://pbs.twimg.com/profile_images/2450268678/olxp11gnt09no2y2wpsh_normal.jpeg"><br>
-      <b>Your Name</b><br>
-      100 followers
+      <b>Nimit Maru</b><br>
+      100 followers 
     </div>
-    <div class="col-md-9">
-    
+    <dl class="col-md-9 tweetbox">
       <!-- display tweets here -->
       {% for tweet in tweets %}
-        <li>{{tweet.text}}</li>
+      <div class="tweet">
+        <dt class="tweet-photo"><img src="/images/{{tweet.photo}}"></dt>
+        <dd class="tweet-name">{{tweet.name}}</dd>
+        <dd class="tweet-text">{{tweet.text}} 
+        <span class="tweet-hashtag">{{tweet.hashtag}}</span></dd>
+      </div>
       {% endfor %}
-      
-    </div>
+    </dl>
   </div>
     
 {% endblock %}
