@@ -59,8 +59,13 @@ body {
   font-weight: bold;
 }
 
-.tweet-text {
+.tweet-name a {
+  color: #000;
+}
 
+.tweet-name a:hover {
+  color: green;
+  text-decoration: none;
 }
 
 .tweet-hashtag {
@@ -92,6 +97,11 @@ code {
   height: 48px;
   width: 48px;
 }
+
+.tweetbox img[src$="/"] {
+  content: url("http://lorempixel.com/48/48");
+}
+
 .content {
   margin-left: 60px;
 }
