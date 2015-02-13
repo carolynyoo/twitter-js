@@ -11,9 +11,9 @@
       <b>Nimit Maru</b><br>
       100 followers 
     </div>
-    <dl class="col-md-9 tweetbox">
+    <dl id="box" class="col-md-9 tweetbox">
       {% if showForm %}
-      <form action="/submit" method="POST">
+      <form id="tweetform" action="/submit" method="POST">
         <label for="name_field">Name:</label>
         <input name="name" type="text" id="name_field" value="{{username}}" />
 
@@ -34,5 +34,5 @@
       {% endfor %}
     </dl>
   </div>
-    
+
 {% endblock %}

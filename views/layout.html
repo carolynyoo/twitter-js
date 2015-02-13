@@ -78,5 +78,28 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    // Load the socket.io library above, then connect to the server.
+    // Because the socket.io server is being run on the same server as your 
+    // Express instance, you can connect() without any arguments.
+    var socket = io.connect();
+
+    // When 'new_tweet' events are fired, do something with the packaged tweet
+    // send anything as parameter
+    // rewrite routes to append
+    socket.on('new_tweet', function (tweet) { 
+      console.log(("hehehe", tweet, "hahaha"));
+      alert('Refreshing... check the console...');
+       {% block newtweet %}Welcome to Twitter.js{% endblock %}
+
+      var html = '<div class="tweet"><dt class="tweet-photo"><img src="/images/{{tweet.photo}}"></dt><dd class="tweet-name"><a href="/users/{{tweet.name}}">{{tweet.name}}</a></dd><dd class="tweet-text"><a href="/users/{{tweet.name}}/tweets/{{tweet.id}}">{{tweet.text}}<span class="tweet-hashtag">{{tweet.hashtag}}</span></a></dd></div>';
+
+      console.log(html);
+
+      $('#tweetform').append(tweet);
+    }); 
+  </script>
   </body>
 </html>
