@@ -44,5 +44,3 @@ var getFakePhoto = function () {
 for(var i=0; i<20; i++) {
   module.exports.add( getFakeName(), getFakeTweet(), getFakeHashtag(), getFakePhoto(), i.toString());
 }
-
-console.log(list());

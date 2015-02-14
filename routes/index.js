@@ -30,5 +30,6 @@ module.exports = function (io) {
     tweetBank.add(username, bodytext, null, null, id);
     io.sockets.emit('new_tweet', oneTweet);
   })
+
   return router;
 }

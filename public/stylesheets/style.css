@@ -68,6 +68,14 @@ body {
   text-decoration: none;
 }
 
+.tweet-text a {
+  color: #000;
+}
+
+.tweet-text a:hover {
+  text-decoration: none;
+}
+
 .tweet-hashtag {
   color: #4099ff;
 }
