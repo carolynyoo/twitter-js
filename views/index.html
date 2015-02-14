@@ -24,7 +24,6 @@
       </form>
       {% endif %}
       <!-- display tweets here -->
-      <div id="alltweets">
       {% for tweet in tweets %}
       <div class="tweet">
         <dt class="tweet-photo"><img src="/images/{{tweet.photo}}"></dt>
@@ -33,7 +32,6 @@
         <span class="tweet-hashtag">{{tweet.hashtag}}</span></a></dd>
       </div>
       {% endfor %}
-      </div>
     </dl>
   </div>
 
