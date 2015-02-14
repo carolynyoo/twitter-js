@@ -25,8 +25,9 @@ module.exports = function (io) {
     if (!req.body) return res.sendStatus(400);
     var username = req.body.name;
     var bodytext=req.body.text;
-    var oneTweet = {name: username, text: bodytext};
-    tweetBank.add(username, bodytext);
+    var id = tweetBank.list().length;
+    var oneTweet = {name: username, text: bodytext, id: id};
+    tweetBank.add(username, bodytext, null, null, id);
     io.sockets.emit('new_tweet', oneTweet);
   })
   return router;
