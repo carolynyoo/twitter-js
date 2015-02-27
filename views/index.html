@@ -15,7 +15,7 @@
       {% if showForm %}
       <form id="tweetform" action="/submit" method="POST">
         <label for="name_field">Name:</label>
-        <input name="name" type="text" id="name_field" value="{{username}}" />
+        <input name="name" type="text" id="name_field" value="{{formName}}" />
 
         <label for="text_field">Text:</label>
         <input name="text" type="text" id="text_field" style="width: 350px;" />
@@ -26,10 +26,9 @@
       <!-- display tweets here -->
       {% for tweet in tweets %}
       <div class="tweet">
-        <dt class="tweet-photo"><img src="/images/{{tweet.photo}}"></dt>
-        <dd class="tweet-name"><a href="/users/{{tweet.name}}">{{tweet.name}}</a></dd>
-        <dd class="tweet-text"><a href="/users/{{tweet.name}}/tweets/{{tweet.id}}">{{tweet.text}} 
-        <span class="tweet-hashtag">{{tweet.hashtag}}</span></a></dd>
+        <dt class="tweet-photo"><img src="/images/{{tweet.User.pictureUrl}}"></dt>
+        <dd class="tweet-name"><a href="/users/{{tweet.User.name}}">{{tweet.User.name}}</a></dd>
+        <dd class="tweet-text"><a href="/users/{{tweet.User.name}}/tweets/{{tweet.id}}">{{tweet.tweet}} </a></dd>
       </div>
       {% endfor %}
     </dl>
