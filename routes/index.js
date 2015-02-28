@@ -16,13 +16,13 @@ module.exports = function(io) {
 
     Tweet.findAll({ include: [ User ] })
     .then(function(tweets) {
-      tweetArray = tweets.map(function (tweet) {
+        tweets.map(function (tweet) {
         var vals = tweet.get();
         vals.User = tweet.User.get();
         return vals;
       }); 
       res.render('index', {
-        tweets: tweetArray,
+        tweets: tweets,
         showForm: true
       })
     })
@@ -30,26 +30,26 @@ module.exports = function(io) {
   })
 
   router.get('/users/:name', function(req, res) {
-
-    var tweetArray = [];
     var userName = req.params.name
 
-    // fix
-    User.findAll({where: {name: userName}})
-    .then(function(user) {
-      user.getTweets()
-          .then(function (tweets) {
-            var tweetArray = tweets.map(function (tweet) {
-              var vals = tweet.get();
-              vals.User = user;
-              return vals;
-            })
+    // one user, so .find
+    // remember to put res render inside promise 
+    User
+    .find({where: {name: userName}})
+    .then(function (user) {
+      user
+      .getTweets()
+      .then(function (tweets) {
+          var tweetArray = tweets.map(function (tweet) {
+          var vals = tweet.get();
+          vals.User = user;
+          return vals;
+        });
+          res.render('index', {
+            tweets: tweetArray,
+            formName: userName,
+            showForm: true
           })
-
-      res.render('index', {
-        tweets: tweetArray,
-        formName: userName,
-        showForm: true
       })
     })
   })
@@ -76,32 +76,23 @@ module.exports = function(io) {
     // (1b) ELSE CREATE userName in Users table and return User ID
     //(2) Create a new tweetText in the Tweet table with a userId from 1a/1b and an auto-incremented ID
 
-    User.findOrCreate({ where: {name: userName}, defaults: {} })
-    .then(function(user) {
-      tableUserId = user[0].dataValues.id;
+    User
+    .findOrCreate({ where: {name: userName}, defaults: {name: userName} })
+    .then(function (user) {
+      tableUserId = user[0].id;
       // console.log("WROTE TO USER TABLE " + tableUserId);
-      Tweet.create({UserId: tableUserId, tweet: tweetText});
+      Tweet
+      .create({UserId: tableUserId, tweet: tweetText})
       // console.log("WROTE TO TWEET TABLE, NEW TWEET " + tweetText);
-      }
-    )
-
-    //Select all tweets from database and push them into tweetArray
-
-    //TODO
-
-    Tweet.findAll({ include: [ User ] })
-    .then(function(tweets) {
-      for (var i = 0; i < tweets.length; i++) {
-        tweetArray.push(tweets[i].dataValues);
-        var all_tweets = tweetArray;
-        var last_tweet = all_tweets[all_tweets.length-1];
-        // last_tweet = last_tweet[last_tweet.length-1];
-        // console.log(last_tweet);
-        io.sockets.emit('new_tweet', last_tweet);
-        res.redirect('/')
-      }
+      .then(function (tweet) {
+        io.sockets.emit('new_tweet', {
+          tweet: tweet.tweet,
+          User: {name: user.name}
+        });
+        res.redirect('/');
+      })
+      // key to socket - put as promise after success of tweet creation
     })
-    
   })
 
   return router
